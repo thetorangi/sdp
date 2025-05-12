@@ -56,7 +56,6 @@ class SpanishLocalizer:
     """it simply returns the spanish version"""
 
     def __init__(self):
-
         self.translations = {"car": "coche", "bike": "bicicleta",
                              "cycle":"ciclo"}
 
@@ -71,18 +70,28 @@ class EnglishLocalizer:
     def localize(self, msg):
         return msg
 
-# main method to call others
-f = FrenchLocalizer()
-e = EnglishLocalizer()
-s = SpanishLocalizer()
+def Factory(language ="English"):
 
-# list of strings
+    """Factory Method"""
+    localizers = {
+        "French": FrenchLocalizer,
+        "English": EnglishLocalizer,
+        "Spanish": SpanishLocalizer,
+    }
+
+    return localizers[language]()
+
+f = Factory("French")
+e = Factory("English")
+s = Factory("Spanish")
+
 message = ["car", "bike", "cycle"]
 
 for msg in message:
     print(f.localize(msg))
     print(e.localize(msg))
     print(s.localize(msg))
+
 
 #=================
 #=================
